@@ -1,0 +1,148 @@
+﻿@{
+    var status = Context.Request.Query["status"];
+    var pending = "text-primary";
+    var inprocess = "text-primary";
+    var completed = "text-primary";
+    var approved = "text-primary";
+    var all = "text-primary";
+
+    switch (status)
+    {
+        case "pending":
+            pending = "active text-white bg-primary";
+            break;
+        case "inprocess":
+            inprocess = "active text-white bg-primary";
+            break;
+        case "completed":
+            completed = "active text-white bg-primary";
+            break;
+        case "approved":
+            approved = "active text-white bg-primary";
+            break;
+        default:
+            all = "active text-white bg-primary";
+            break;
+    }
+}
+
+
+
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Order List</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between pb-5 pt-2">
+            <span></span>
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index">
+                <li  class="list-group-item" @inprocess>In Process</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" >
+                <li class="list-group-item" @pending>Payment Pending</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" >
+                <li class="list-group-item" @completed>Completed</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" >
+                <li class="list-group-item" @approved>Approved</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" >
+                <li  class="list-group-item" @all>All</li>
+                </a>
+            </ul>
+        </div>
+        @*<style>
+            .active {
+                background-color: lightblue;
+            }
+        </style>*@
+        
+        <table id="tblData" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        PhoneNumber
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Total
+                    </th>
+
+                </tr>
+            </thead>
+
+
+
+            @*<tbody>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+            <td>
+            @item.Id
+            </td>
+            <td>
+            @item.Name
+            </td>
+            <td>
+            @item.Phonenumber
+            </td>
+            <td>
+            @item.ApplicationUser.Email
+            </td>
+            <td>
+            @item.OrderStatus
+            </td>
+            <td>
+            @item.OrderTotal
+            </td>
+            <td>
+            <div class="w-75 btn-group" role="group">
+            <a asp-controller="Order" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+            <i class="bi bi-pencil-square"></i> Details
+            </a>
+
+            </div>
+            </td>
+            </tr>
+            }
+
+            </tbody>*@
+
+
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/order.js"></script>
+   @* <script>
+        function setActive(clickedElement){
+            var myList=document.getElementById("myList");
+            for(var i=0;i<myList.children.length; i++){
+                myList.children[i].classList.remove("active");
+            }
+            clickedElement.classList.add("active");
+        }
+    </script>*@
+}
